@@ -28,6 +28,15 @@ SECTIONS
           *(SORT_BY_INIT_PRIORITY(.dtors*))
           *(.fini_array)
           __fini_array_end = . ;
+
+	  /* EH: Unwind data */
+	  . = ALIGN(32 / 8);
+	  __eh_frame_start = . ;
+	  *(.eh_frame)
+	  LONG(0);
+	  /* EH: LSDA */
+	  *(.gcc_except_table)
+	  *(.gcc_except_table.*)
 	  }
 
   . = ALIGN(4096);

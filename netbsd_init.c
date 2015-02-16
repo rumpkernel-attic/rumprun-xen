@@ -53,6 +53,11 @@ runfini(void)
 		(*fn)();
 }
 
+extern const long __eh_frame_start[0];
+__weakref_visible void register_frame_info(const void *, const void *)
+	__weak_reference(__register_frame_info);
+static long dwarf_eh_object[8];
+
 void
 _netbsd_init(void)
 {
@@ -66,6 +71,8 @@ _netbsd_init(void)
 
 	environ = the_env;
 	_lwp_rumpxen_scheduler_init();
+	if (register_frame_info)
+		register_frame_info(__eh_frame_start, &dwarf_eh_object);
 	runinit();
 	_libc_init();
 
