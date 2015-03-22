@@ -1,8 +1,6 @@
 #!/bin/sh
 
 echo '>>'
-echo '>> THIS SCRIPT IS FOR COMPAT AND WILL BE DEPRECATED SOON'
+echo '>> MERGED TO http://repo.rumpkernel.org/rumprun
 echo '>>'
-sleep 1
-
-./build-rr.sh xen "$@"
+exit 1
